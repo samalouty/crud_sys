@@ -1,0 +1,53 @@
+<div class="d-flex">
+  <div class="w-50 shadow ms-3 p-5">
+    <form #userForm="ngForm">
+      <div class="row g-5">
+        <div class="col-md-6">
+          <label for="lname">Name</label>
+          <input
+            name="lname"
+            #lname="ngModel"
+            id="lname"
+            type="text"
+            class="form-control"
+            placeholder="Enter Last Name"
+            [(ngModel)]="addedUser.name"
+            required
+          />
+          <span class="text-danger" *ngIf="lname.invalid && lname.dirty">Last Name is Required</span>
+        </div>
+        <div class="col-md-6">
+          <label for="email">Email</label>
+          <input
+            name="email"
+            #email="ngModel"
+            id="email"
+            type="text"
+            class="form-control"
+            placeholder="Enter Email"
+            [(ngModel)]="addedUser.email"
+            required
+          />
+          <span class="text-danger" *ngIf="email.invalid && email.dirty">Email is Required</span>
+        </div>
+        <div class="col-md-6">
+          <label for="Address">Address</label>
+          <input
+            name="Address"
+            #Address="ngModel"
+            id="Address"
+            type="text"
+            class="form-control"
+            placeholder="Enter Address"
+            [(ngModel)]="addedUser.address"
+            required
+          />
+          <span class="text-danger" *ngIf="Address.invalid && Address.dirty">Age is Required</span>
+        </div>
+        <div class="col-md-12 d-flex justify-content-end">
+          <button class="btn btn-secondary" (click)="UpdateUser(userForm)" [disabled]="userForm.invalid">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

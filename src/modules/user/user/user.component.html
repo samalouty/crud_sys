@@ -1,0 +1,115 @@
+<div class="d-flex">
+  <div class="w-50 shadow ms-3 p-5">
+    <form #userForm="ngForm">
+      <div class="row g-5">
+        <div class="col-md-6">
+          <label for="lname">Name</label>
+          <input
+            name="lname"
+            #lname="ngModel"
+            id="lname"
+            type="text"
+            class="form-control"
+            placeholder="Enter Last Name"
+            [(ngModel)]="addedUser.name"
+            required
+          />
+          <span class="text-danger" *ngIf="lname.invalid && lname.dirty">Last Name is Required</span>
+        </div>
+        <div class="col-md-6">
+          <label for="email">Email</label>
+          <input
+            name="email"
+            #email="ngModel"
+            id="email"
+            type="text"
+            class="form-control"
+            placeholder="Enter Email"
+            [(ngModel)]="addedUser.email"
+            required
+          />
+          <span class="text-danger" *ngIf="email.invalid && email.dirty">Email is Required</span>
+        </div>
+        <div class="col-md-6">
+          <label for="Address">Address</label>
+          <input
+            name="Address"
+            #Address="ngModel"
+            id="Address"
+            type="text"
+            class="form-control"
+            placeholder="Enter Address"
+            [(ngModel)]="addedUser.address"
+            required
+          />
+          <span class="text-danger" *ngIf="Address.invalid && Address.dirty">Age is Required</span>
+        </div>
+        <div class="col-md-12 d-flex justify-content-end">
+          <button class="btn btn-secondary" (click)="AddUser(userForm)" [disabled]="userForm.invalid">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="w-50 shadow ms-3 me-3 p-5">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Address</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of UserList; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ item.name }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.address }}</td>
+          <td>
+            <button class="btn btn-info" (click)="GetUser(item.id)">View</button>
+            <button class="btn btn-secondary ms-3" [routerLink]="'/user/' + item.id">Edit</button>
+            <button class="btn btn-danger ms-3" (click)="DeleteUser(item.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+
+
+<p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible" [draggable]="false" [style]="{ width: '25rem' }">
+    <div class="row g-5">
+      <div class="col-md-12">
+        <label>Name</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="viewUser.name"
+          readonly
+        />
+      </div>
+      <div class="col-md-12">
+        <label>address</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="viewUser.address"
+          readonly
+        />
+      </div>
+      <div class="col-md-12">
+        <label>email</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="viewUser.email"
+          readonly
+        />
+      </div>
+    </div>
+</p-dialog>
